@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (2026-11-06)
+
+- Published from GitHub Actions with npm provenance.
+
 ## 0.1.0 (2026-11-06)
 
 - First release for AI SDK 7 (provider specification v4): `cutpro.image()` for `generateImage`, `cutpro.speech()` for `generateSpeech` and `cutpro.video()` for `experimental_generateVideo`.
