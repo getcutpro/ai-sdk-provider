@@ -1,0 +1,77 @@
+{
+	"name": "@cutpro/ai-sdk-provider",
+	"version": "0.1.0",
+	"description": "Cut.Pro provider for the Vercel AI SDK: generateImage, generateSpeech and experimental_generateVideo with Seedance, Wan, Kling, Veo, Nano Banana, Seedream, GPT Image and Gemini TTS",
+	"license": "MIT",
+	"author": "Cut.Pro",
+	"homepage": "https://github.com/getcutpro/ai-sdk-provider#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/getcutpro/ai-sdk-provider.git"
+	},
+	"bugs": "https://github.com/getcutpro/ai-sdk-provider/issues",
+	"keywords": [
+		"ai-sdk",
+		"vercel-ai-sdk",
+		"ai-sdk-provider",
+		"cutpro",
+		"generateImage",
+		"generateSpeech",
+		"generateVideo",
+		"video-generation",
+		"image-generation",
+		"text-to-speech",
+		"seedance",
+		"wan",
+		"kling",
+		"veo",
+		"nano-banana",
+		"seedream",
+		"gpt-image",
+		"gemini-tts"
+	],
+	"type": "module",
+	"sideEffects": false,
+	"engines": {
+		"node": ">=18"
+	},
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			},
+			"require": {
+				"types": "./dist/index.d.cts",
+				"default": "./dist/index.cjs"
+			}
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"scripts": {
+		"build": "tsup src/index.ts --format esm,cjs --dts --clean",
+		"typecheck": "tsc --noEmit",
+		"test": "vitest run",
+		"prepublishOnly": "npm run typecheck && npm test && npm run build"
+	},
+	"dependencies": {
+		"@ai-sdk/provider": "^4.0.36",
+		"@cutpro/sdk": "^0.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "^22.20.5",
+		"ai": "^7.0.164",
+		"tsup": "^9.0.0",
+		"typescript": "^5.9.3",
+		"vitest": "^5.1.0"
+	}
+}
