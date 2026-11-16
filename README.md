@@ -1,6 +1,6 @@
 # Cut.Pro provider for the Vercel AI SDK: Seedance, Wan, Kling, Veo, Nano Banana and Gemini TTS
 
-[![npm](https://img.shields.io/npm/v/@cutpro/ai-sdk-provider)](https://www.npmjs.com/package/@cutpro/ai-sdk-provider) [![license](https://img.shields.io/npm/l/@cutpro/ai-sdk-provider)](LICENSE)
+[![CI](https://github.com/getcutpro/ai-sdk-provider/actions/workflows/ci.yml/badge.svg)](https://github.com/getcutpro/ai-sdk-provider/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/@cutpro/ai-sdk-provider)](https://www.npmjs.com/package/@cutpro/ai-sdk-provider) [![license](https://img.shields.io/npm/l/@cutpro/ai-sdk-provider)](LICENSE)
 
 Community provider for the [AI SDK](https://ai-sdk.dev) (`ai` 7). One Cut.Pro key gives `generateImage`, `generateSpeech` and `experimental_generateVideo` access to Seedance 2.5, Wan 3, Kling O3, Veo 3.1, Gemini Omni Flash, Nano Banana Pro, Seedream 5, Qwen Image, GPT Image, Grok Imagine, MiniMax and Gemini TTS voices. Priced per second of video, per image or per 1,000 characters, in reais and dollars: see the [live price list](https://cut.pro/en/models). Pay with Pix or card; companies get an invoice.
 

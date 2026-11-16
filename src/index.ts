@@ -18,6 +18,8 @@ import {
 } from "@ai-sdk/provider";
 import { CutPro, CutProError, type AspectRatio, type CreateGenerationRequest, type CutProOptions, type Generation, type GenerationMode } from "@cutpro/sdk";
 
+const USER_AGENT = "cutpro-ai-sdk/0.2.0";
+
 export { CutProError };
 
 const PROVIDER = "cutpro";
@@ -54,7 +56,7 @@ export type CutProSpeechModelId =
 	| "elevenlabs/v3"
 	| (string & {});
 
-/** Any field of `POST /generations` (`resolution`, `mode`, `options`, `image_ids`, `webhook_url`, `credits`), under `providerOptions.cutpro`. */
+/** Additional `POST /generations` fields passed through `providerOptions.cutpro`. */
 export type CutProProviderOptions = Omit<CreateGenerationRequest, "prompt">;
 
 export type CutProProviderSettings = CutProOptions;
@@ -87,7 +89,7 @@ function bytesOf(data: string | Uint8Array): Uint8Array<ArrayBuffer> {
 	return typeof data === "string" ? Uint8Array.from(atob(data), (char) => char.charCodeAt(0)) : new Uint8Array(data);
 }
 
-// Links go straight in `image_urls`; once any file needs an upload, every one is uploaded so `image_ids` keeps their order (first frame before last).
+// Upload every input when any file lacks a URL to preserve reference order in `image_ids`.
 async function imageInputs(context: Context, files: MediaFile[], signal: AbortSignal | undefined): Promise<Pick<CreateGenerationRequest, "image_ids" | "image_urls">> {
 	if (!files.length) return {};
 	const urls = files.flatMap((file) => (file.type === "url" ? [file.url] : []));
@@ -244,7 +246,7 @@ function definedHeaders(headers: Record<string, string | undefined> | undefined)
 }
 
 export function createCutPro(settings: CutProProviderSettings = {}): CutProProvider {
-	const context = (): Context => ({ client: new CutPro(settings), fetch: settings.fetch ?? ((input, init) => fetch(input, init)) });
+	const context = (): Context => ({ client: new CutPro({ ...settings, headers: { "User-Agent": USER_AGENT, ...settings.headers } }), fetch: settings.fetch ?? ((input, init) => fetch(input, init)) });
 	const image = (modelId: string) => new CutProImageModel(modelId, context());
 	const speech = (modelId: string) => new CutProSpeechModel(modelId, context());
 	const video = (modelId: string) => new CutProVideoModel(modelId, context());
@@ -265,5 +267,4 @@ export function createCutPro(settings: CutProProviderSettings = {}): CutProProvi
 	};
 }
 
-/** Reads the key from `CUTPRO_API_KEY`. */
 export const cutpro = createCutPro();
